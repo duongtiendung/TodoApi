@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>a973c0a3-cb8a-48d8-914c-bb13976fa1de</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+	<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.26" />
+	<PackageReference Include="MySql.Data" Version="8.2.0" />
+	<PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.21" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.24">
+    <PrivateAssets>all</PrivateAssets>
+    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+  </PackageReference>
+  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.24" />
+  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>
