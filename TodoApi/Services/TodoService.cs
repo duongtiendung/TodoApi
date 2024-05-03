@@ -20,7 +20,7 @@ namespace TodoApi.Services
 
         public async Task<List<Todo>> GetAllTodosAsync(int pageNumber, int pageSize,int userId)
         {
-                return await _context.Todos.Where(t=>t.UserId == userId)
+                return await _context.Todos.Where(t => t.UserId == userId && !t.IsDeleted)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
@@ -33,7 +33,7 @@ namespace TodoApi.Services
 
         public async Task<bool> UpdateTodoAsync(TodoUpdateRequest todoRequest,int userId)
         {
-            var todo = await _context.Todos.Where(t=>t.UserId == userId).Where(d=>d.Id == todoRequest.Id).FirstOrDefaultAsync();
+            var todo = await _context.Todos.Where(t => t.UserId == userId && !t.IsDeleted).Where(d=>d.Id == todoRequest.Id).FirstOrDefaultAsync();
             if (todo == null)
             {
                 return false;
@@ -64,19 +64,20 @@ namespace TodoApi.Services
 
         public async Task<bool> DeleteTodoAsync(int id,int userId)
         {
-            var todo = await _context.Todos.Where(t=>t.UserId == userId).Where(d=>d.Id == id).FirstOrDefaultAsync();
+            var todo = await _context.Todos.Where(t => t.UserId == userId).Where(d => d.Id == id).FirstOrDefaultAsync();
             if (todo == null)
             {
                 return false;
             }
-            _context.Todos.Remove(todo);
+
+            todo.IsDeleted = true;
             await _context.SaveChangesAsync();
             return true;
         }
 
         public  int Count(int userId)
         {
-            var total =  _context.Todos.Where(t=>t.UserId == userId).Count();
+            var total =  _context.Todos.Where(t=>t.UserId == userId && !t.IsDeleted).Count();
             return total;  
         }
 
